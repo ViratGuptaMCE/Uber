@@ -7,5 +7,6 @@ module.exports.createUser = async (
     return res.status(400).send({ message: 'Please provide all required fields' });
   }
   const user = new userModel({ email, password, fullName: { firstName, lastName } });
+  user.save();
   return user;
 }
