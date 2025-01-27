@@ -25,19 +25,22 @@ const CaptainSignup = () => {
         firstName: firstName,
         lastName: lastName,
       },
-      email: email,
+      email: email, 
       password: password,
       vehicle: {
         color: vehicleColor,
         plate: vehiclePlate,
         capacity: vehicleCapacity,
-        vehicleType: vehicleType,
+        type: vehicleType,
       },
     };
+    // console.log(captainData)
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, captainData)
+    // console.log(response.status)
     if (response.status === 201) {
       const data = response.data
       setCaptain(data.captain)
+      console.log(captain)
       localStorage.setItem('token', data.token)
       navigate('/captain-home')
     }

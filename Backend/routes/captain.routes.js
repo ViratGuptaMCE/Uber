@@ -5,7 +5,7 @@ const { body } = require('express-validator');
 const authMiddleware = require('../middleware/auth');
 
 router.post('/register', [
-  body('email').isEmail(),
+  body('email').isEmail().withMessage('Invalid email'),
   body('password').isLength({ min: 6 }).withMessage('Password should be at least 6 characters'),
   body('fullName.firstName').isLength({ min: 3 }).withMessage('First name should be at least 3 characters'),
   body('vehicle.color').isLength({ min: 3 }).withMessage('Color should be at least 3 characters'),

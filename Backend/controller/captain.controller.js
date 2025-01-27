@@ -4,14 +4,17 @@ const captainService = require('../services/captain.service');
 const blackListTokenModel = require('../models/blackListToken.model');
 
 module.exports.registerCaptain = async (req, res) => {
+  // console.log(req.body);
   const err = validationResult(req);
   if (!err.isEmpty()) {
+    console.log("Error occured");
     return res.status(400).json({ errors: err.array() });
   }
-  const { email, password, fullName, vehicle , status , location } = req.body;
-
+  // console.log(req.body);
+  const { email, password, fullName, vehicle  } = req.body;
+  // console.log(fullName);
   const isCaptainExist = await captainModel.findOne({ email });
-
+  // console.log(isCaptainExist, "Captain Exist");
   if(isCaptainExist) {
     return res.status(400).json({ message: 'Captain already exist' });
   }
@@ -22,8 +25,6 @@ module.exports.registerCaptain = async (req, res) => {
     password: hashedPassword,
     firstName: fullName.firstName,
     lastName: fullName.lastName,
-    status,
-    location,
     ...vehicle,
   });
   const token = captain.generateAuthToken();
@@ -53,7 +54,7 @@ module.exports.loginCaptain = async (req, res) => {
 }
 
 module.exports.getProfile = async (req, res) => {
-  res.status(200).json(req.captain);
+  res.status(200).json({ captain: req.captain });
 }
 
 module.exports.logoutCaptain = async (req, res) => {
