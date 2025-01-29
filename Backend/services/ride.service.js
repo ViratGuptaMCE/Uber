@@ -55,7 +55,7 @@ module.exports.createRide = async ({ user, pickup, destination, vehicleType }) =
   }
   const fare = await getFare(pickup, destination);
   const ride = rideModel.create({
-    userId: user._id,
+    user: user._id,
     pickup,
     destination,
     fare: fare[vehicleType],
@@ -63,5 +63,35 @@ module.exports.createRide = async ({ user, pickup, destination, vehicleType }) =
   });
   return ride;
 }
+
+module.exports.confirmRide = async ({ rideId, captain }) => {
+  if (!rideId) {
+    throw new Error("Ride id is required");
+  }
+
+  await rideModel.findOneAndUpdate(
+    {
+      _id: rideId,
+    },
+    {
+      status: "accepted",
+      captain: captain._id,
+    }
+  );
+
+  const ride = await rideModel
+    .findOne({
+      _id: rideId,
+    })
+    .populate("user")
+    .populate("captain")
+    .select("+otp");
+
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
+  return ride;
+};
 
 module.exports.getFare = getFare;

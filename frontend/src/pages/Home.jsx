@@ -8,6 +8,10 @@ import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver";
 // import { set } from "mongoose";
+import { SocketContext } from "../context/socketContext";
+import { useEffect } from "react";
+import { useContext } from "react";
+import {UserDataContext} from "../context/UserContext";
 
 const Home = () => {
     const [pickup, setPickup] = useState("");
@@ -24,7 +28,21 @@ const Home = () => {
     const [isPickup, setIsPickup] = useState(true);
 
     const [vehicleFound, setVehicleFound] = useState(false);
-    const [waitingForDriver, setWaitingForDriver] = useState(false);
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
+  
+  const { socket } = useContext(SocketContext);
+  const {user} = useContext(UserDataContext);
+
+  useEffect(() => {
+    if(!user) return;
+    socket.emit('join', {userType: 'user', userId: user._id});
+  }, [user]);
+  
+  socket.on('ride-confirmed', ride => {
+    setVehicleFound(false)
+    setWaitingForDriver(true);
+  })
+
     const submitHandler = (e) => {
         e.preventDefault()
     }
@@ -121,7 +139,7 @@ const Home = () => {
             >
               <i className="ri-arrow-down-wide-line"></i>
             </h5>
-            <h4 className="text-2xl font-semibold">Get a Route</h4>
+            <h4 className="text-2xl font-semibold">Get a safe Route</h4>
             <form
               onSubmit={(e) => {
                 submitHandler(e);

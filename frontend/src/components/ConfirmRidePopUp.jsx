@@ -16,7 +16,7 @@ const ConfirmRidePopUp = (props) => {
         <i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i>
       </h5>
       <h3 className="text-2xl font-semibold mb-5">
-        Confirm this ride to Start
+        {/* Confirm this ride to Start */}
       </h3>
       <div className="flex items-center justify-between p-3 border-2 border-yellow-400 rounded-lg mt-4">
         <div className="flex items-center gap-3 ">

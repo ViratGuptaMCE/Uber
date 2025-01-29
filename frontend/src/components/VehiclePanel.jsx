@@ -10,7 +10,7 @@ const VehiclePanel = (props) => {
       >
         <i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i>
       </h5>
-      <h3 className="text-2xl font-semibold mb-5">Choose a Vehicle</h3>
+      <h3 className="text-2xl font-semibold mb-5">Any Emergency</h3>
       <div
         onClick={() => {
           props.setConfirmRidePanel(true);
@@ -19,22 +19,22 @@ const VehiclePanel = (props) => {
       >
         <img
           className="h-10"
-          src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg"
+          src="/suspicious.png"
           alt=""
         />
         <div className="ml-2 w-1/2">
-          <h4 className="font-medium text-base">
-            UberGo{" "}
+          <h4 className="font-medium text-base text-orange-500">
+            Suspicious{" "}
             <span>
-              <i className="ri-user-3-fill"></i>4
+              {/* <i className="ri-user-3-fill"></i> */}
             </span>
           </h4>
-          <h5 className="font-medium text-sm">2 mins away </h5>
+          <h5 className="font-medium text-sm">Track Voice </h5>
           <p className="font-normal text-xs text-gray-600">
-            Affordable, compact rides
+            We will just track sound signals and act accordingly in case of any emergency
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹193.20</h2>
+        <h2 className="text-lg font-semibold">Confirm</h2>
       </div>
       <div
         onClick={() => {
@@ -44,22 +44,22 @@ const VehiclePanel = (props) => {
       >
         <img
           className="h-10"
-          src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_638,w_956/v1649231091/assets/2c/7fa194-c954-49b2-9c6d-a3b8601370f5/original/Uber_Moto_Orange_312x208_pixels_Mobile.png"
+          src="/sos.png"
           alt=""
         />
         <div className="-ml-2 w-1/2">
-          <h4 className="font-medium text-base">
-            Moto{" "}
+          <h4 className="font-medium text-base text-red-500">
+            SOS{" "}
             <span>
-              <i className="ri-user-3-fill"></i>1
+              {/* <i className="ri-user-3-fill"></i>1 */}
             </span>
           </h4>
-          <h5 className="font-medium text-sm">3 mins away </h5>
+          <h5 className="font-medium text-sm">Send Location </h5>
           <p className="font-normal text-xs text-gray-600">
-            Affordable motorcycle rides
+            To Police and family
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹65</h2>
+        <h2 className="text-lg font-semibold">Send</h2>
       </div>
       <div
         onClick={() => {
@@ -69,22 +69,22 @@ const VehiclePanel = (props) => {
       >
         <img
           className="h-10"
-          src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1648431773/assets/1d/db8c56-0204-4ce4-81ce-56a11a07fe98/original/Uber_Auto_558x372_pixels_Desktop.png"
+          src="/peace.png"
           alt=""
         />
         <div className="ml-2 w-1/2">
-          <h4 className="font-medium text-base">
-            UberAuto{" "}
+          <h4 className="font-medium text-base text-green-500">
+            AskHelp{" "}
             <span>
-              <i className="ri-user-3-fill"></i>3
+              {/* <i className="ri-user-3-fill"></i>3 */}
             </span>
           </h4>
-          <h5 className="font-medium text-sm">3 mins away </h5>
+          <h5 className="font-medium text-sm">Ask Nearby People for help </h5>
           <p className="font-normal text-xs text-gray-600">
-            Affordable Auto rides
+            Don't worry the helpers details will be provided to police also
           </p>
         </div>
-        <h2 className="text-lg font-semibold">₹118.86</h2>
+        <h2 className="text-lg font-semibold">Ask</h2>
       </div>
     </div>
   );

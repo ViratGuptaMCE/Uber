@@ -47,7 +47,7 @@ const App = () => {
           element={
             // <CaptainProtectWrapper>
               <CaptainHome />
-            // {/* </CaptainProtectWrapper> */}
+            // </CaptainProtectWrapper> 
           }
         />
         <Route
