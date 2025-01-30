@@ -1,5 +1,6 @@
 const rideModel = require('../models/ride.model');
 const mapService = require('../services/maps.service');
+const { sendMessageToSocketId } = require('../socket');
 
 async function getFare(pickup, destination) {
   if (!pickup || !destination) {
@@ -7,7 +8,7 @@ async function getFare(pickup, destination) {
   }
   try {
     const distanceTime = await mapService.getDistanceTime(pickup, destination);
-    console.log("fine 1 ",distanceTime);
+    // console.log("fine 1 ",distanceTime);
     const { distance, duration } = distanceTime;
     let time, tmUnit, dist, distUnit;
     time = duration.split(" ")[0];
@@ -15,7 +16,7 @@ async function getFare(pickup, destination) {
     dist = distance.split(" ")[0];
     distUnit = distance.split(" ")[1];
     let fare = 30;
-    console.log("fine 2");
+    // console.log("fine 2");
     
     if (distUnit === 'km') {
       fare += dist * 10; 
@@ -30,14 +31,14 @@ async function getFare(pickup, destination) {
     } else if (tmUnit === 'days') {
       fare += time * 24 * 60 * 2; 
     }
-    console.log("fine 3");
+    // console.log("fine 3");
     const fareObj = {
       auto: fare,
       bike: fare * 0.75,
       car: fare * 1.5
     }
     
-    console.log("fine 4");
+    // console.log("fine 4");
     return fareObj;
   }
   catch (err) {
@@ -91,6 +92,46 @@ module.exports.confirmRide = async ({ rideId, captain }) => {
     throw new Error("Ride not found");
   }
 
+  return ride;
+};
+
+module.exports.startRide = async ({ rideId, otp, captain }) => {
+  if (!rideId || !otp) {
+    throw new Error("Ride id and OTP are required");
+  }
+
+  console.log("Took Service");
+  const ride = await rideModel
+    .findOne({
+      _id: rideId,
+    })
+    .populate("user")
+    .populate("captain")
+    .select("+otp");
+
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
+  if (ride.status !== "accepted") {
+    throw new Error("Ride not accepted");
+  }
+
+  if (ride.otp !== otp) {
+    throw new Error("Invalid OTP");
+  }
+
+
+  await rideModel.findOneAndUpdate(
+    {
+      _id: rideId,
+    },
+    {
+      status: "ongoing",
+    }
+  );
+
+  console.log("service done")
   return ride;
 };
 

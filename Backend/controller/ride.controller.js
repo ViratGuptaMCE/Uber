@@ -30,7 +30,7 @@ module.exports.createRide = async (req, res) => {
     // console.log("Fine till here 2", captainsInRadius);
     captainsInRadius.map(captain => {
       // console.log("\nInside Mapping\n")
-      console.log("Socket Sent",captain);
+      // console.log("Socket Sent",captain);
       sendMessageToSocketId(captain.socketId, {
         event: 'new-ride',
         data: rideWithUser
@@ -58,22 +58,54 @@ module.exports.getFare = async (req, res) => {
 };
 
 module.exports.confirmRide = async (req, res) => {
+  // console.log("Inside Confirm Ride Control ")
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-
+  // console.log("Inside Confirm Ride Control ")
   const { rideId } = req.body;
 
   try {
     const ride = await rideService.confirmRide({rideId, captain : req.captain});
-
+    console.log("We were here controlled");
     sendMessageToSocketId(ride.user.socketId, {
       event: 'ride-confirmed',
       data : ride
     })
+    console.log("Under Try");
     return res.status(200).json(ride);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 }
+
+
+module.exports.startRide = async (req, res) => {
+  console.log("Under Controller");
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { rideId, otp } = req.query;
+
+  try {
+    const ride = await rideService.startRide({
+      rideId,
+      otp,
+      captain: req.captain,
+    });
+
+    console.log('Under Try ' ,ride);
+
+    sendMessageToSocketId(ride.user.socketId, {
+      event: "ride-started",
+      data: ride,
+    });
+
+    return res.status(200).json(ride);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};

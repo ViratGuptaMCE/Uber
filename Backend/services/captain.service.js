@@ -6,6 +6,6 @@ module.exports.createCaptain = async ({ email, password, firstName, lastName ,co
   }
   const captain = new captainModel({ email, password, fullName: { firstName, lastName }, vehicle: { color, plate, capacity, type } });
   captain.save();
-  console.log("Captain saved");
+  // console.log("Captain saved");
   return captain;
 }

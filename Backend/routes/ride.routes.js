@@ -22,4 +22,7 @@ router.post('/confirm', authMiddleware.authCaptain,
   rideController.confirmRide
 )
 
+
+router.get("/start-ride",authMiddleware.authCaptain , query('rideId').isMongoId().withMessage('Invalid ride Id'),rideController.startRide);
+
 module.exports = router;

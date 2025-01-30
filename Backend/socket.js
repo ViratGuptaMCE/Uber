@@ -43,10 +43,10 @@ const initializeSocket = (server) => {
 };
 
 const sendMessageToSocketId = (socketId, messag) => {
-  console.log(socketId)
+  // console.log(socketId)
   if (io) {
     io.to(socketId).emit(messag.event, messag.data);
-    console.log("msg sent")
+    // console.log("msg sent")
   } else {
     console.error('Socket.io is not initialized');
   }

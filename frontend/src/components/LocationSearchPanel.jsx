@@ -13,7 +13,6 @@ const LocationSearchPanel = (props) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
       }}
       );
-      console.log("Fetched Data",response.data);
       if (response.data) {
         setSuggestions(response.data);
       }
@@ -33,7 +32,6 @@ const LocationSearchPanel = (props) => {
   // };
   useEffect(() => {
     const value = props.isPickup ? props.pickup : props.destination;
-    console.log("Value  : ",value);
     if (value.length > 2) {
       fetchSuggestions(value);
     } else {
@@ -42,7 +40,6 @@ const LocationSearchPanel = (props) => {
   }, [props.pickup, props.destination]);
   const handleSuggestionClick = (suggestion) => {
     props.setLocation(suggestion.description);
-    // props.setPanelOpen(false);
   };
 
   return (

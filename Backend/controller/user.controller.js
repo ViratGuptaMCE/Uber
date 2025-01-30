@@ -12,7 +12,7 @@ module.exports.registerUser = async (req, res, next) => {
   if (!err.isEmpty()) {
     return res.status(400).send({ message: err.array() });
   }
-  console.log(req.body);
+  // console.log(req.body);
   const { email, password, fullName } = req.body;
 
   const hashedPassword = await userModel.hashPassword(password);
@@ -31,7 +31,7 @@ module.exports.loginUser = async (req, res, next) => {
     return res.status(400).send({ message: err.array() });
   }
   const { email, password} = req.body;
-  console.log(email, password);
+  // console.log(email, password);
   const user = await userModel.findOne({ email }).select('+password');
   console.log(user);
   if (!user) {

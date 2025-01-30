@@ -19,9 +19,9 @@ const RidePopUp = (props) => {
             alt=""
           />
           <h2 className="text-lg font-medium">
-            {/* {props.ride?.user.fullName.firstName +
+            {props.ride?.user.fullName.firstName +
               " " +
-              props.ride?.user.fullName.firstName} */}
+              props.ride?.user.fullName.lastName}
           </h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 KM</h5>
