@@ -9,7 +9,7 @@ const ConfirmRidePopUp = (props) => {
   
   const submitHandler = async (e) => {
     console.log("Confirm Ride Pop Up")
-    // setOtp("3456789");
+    setOtp("3456789");
     e.preventDefault();
     console.log("Confirm Ride Pop Up")
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/start-ride`, {
@@ -89,7 +89,7 @@ const ConfirmRidePopUp = (props) => {
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               type="text"
-              className="bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full mt-3"
+              className="bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full mt-3 hidden"
               placeholder="Type 123 to confirm"
             />
             <button className="w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg">
