@@ -10,8 +10,10 @@ const RidePopUp = (props) => {
       >
         <i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i>
       </h5>
-      <h3 className="text-2xl font-semibold mb-5">New Ride Available!</h3>
-      <div className="flex items-center justify-between p-3 bg-yellow-400 rounded-lg mt-4">
+      <h3 className="text-2xl font-semibold mb-5 text-red-500">
+        Someone Wants Help!
+      </h3>
+      <div className="flex items-center justify-between p-3 text-white rounded-lg mt-4 bg-red-400">
         <div className="flex items-center gap-3 ">
           <img
             className="h-12 rounded-full object-cover w-12"
@@ -21,42 +23,47 @@ const RidePopUp = (props) => {
           <h2 className="text-lg font-medium">
             {props.ride?.user.fullName.firstName +
               " " +
-              props.ride?.user.fullName.lastName}
+              props.ride?.user.fullName.lastName}{" "}
+            might be in trouble
           </h2>
         </div>
-        <h5 className="text-lg font-semibold">2.2 KM</h5>
+        <h5 className="text-lg font-semibold">Helped : 3</h5>
       </div>
       <div className="flex gap-2 justify-between flex-col items-center">
         <div className="w-full mt-5">
           <div className="flex items-center gap-5 p-3 border-b-2">
             <i className="ri-map-pin-user-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">{props.ride?.pickup}</p>
+              {/* <h3 className="text-lg font-medium">562/11-A</h3> */}
+              <p className="text-sm -mt-1 text-gray-600">
+                {/* {props.ride?.pickup} */}
+                Help them to help yourself
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2">
             <i className="text-lg ri-map-pin-2-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
+              {/* <h3 className="text-lg font-medium">562/11-A</h3> */}
               <p className="text-sm -mt-1 text-gray-600">
-                {props.ride?.destination}
+                {/* {props.ride?.destination} */}
+                You will have to turn on your location all time
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
             <i className="ri-currency-line"></i>
             <div>
-              <h3 className="text-lg font-medium">{props.ride?.fare}</h3>
-              <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
+              <h3 className="text-lg font-medium">₹{props.ride?.fare} will be provided if you want praise</h3>
+              {/* <p className="text-sm -mt-1 text-gray-600">Cash Cash</p> */}
             </div>
           </div>
         </div>
         <div className="mt-5 w-full ">
           <button
             onClick={() => {
-                props.setConfirmRidePopupPanel(true);
-                props.confirmRide();
+              props.setConfirmRidePopupPanel(true);
+              props.confirmRide();
             }}
             className=" bg-green-600 w-full text-white font-semibold p-2 px-10 rounded-lg"
           >

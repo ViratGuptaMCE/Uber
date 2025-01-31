@@ -34,11 +34,7 @@ const Captainlogin = () => {
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
       <div>
-        <img
-          className="w-50 mb-3"
-          src="/logo2.jpg"
-          alt=""
-        />
+        <img className="w-50 mb-3" src="/logo2.jpg" alt="" />
         <form
           onSubmit={(e) => {
             submitHandler(e);
@@ -66,14 +62,14 @@ const Captainlogin = () => {
             type="password"
             placeholder="password"
           />
-          <button className="bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base">
+          <button className=" text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base bg-[#d5622d]">
             Login
           </button>
         </form>
         <p className="text-center">
-          Join a fleet?{" "}
+          Join for good ||{" "}
           <Link to="/captain-signup" className="text-blue-600">
-            Register as a Captain
+            Forgot Password
           </Link>
         </p>
       </div>
@@ -82,7 +78,7 @@ const Captainlogin = () => {
           to="/login"
           className="bg-[#d5622d] flex items-center justify-center text-white font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base"
         >
-          Sign in as User
+          Sign in
         </Link>
       </div>
     </div>

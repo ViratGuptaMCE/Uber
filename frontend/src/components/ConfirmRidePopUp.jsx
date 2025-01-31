@@ -9,6 +9,7 @@ const ConfirmRidePopUp = (props) => {
   
   const submitHandler = async (e) => {
     console.log("Confirm Ride Pop Up")
+    // setOtp("3456789");
     e.preventDefault();
     console.log("Confirm Ride Pop Up")
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/start-ride`, {
@@ -48,36 +49,37 @@ const ConfirmRidePopUp = (props) => {
             alt=""
           />
           <h2 className="text-lg font-medium">
-            {props.ride?.user.fullName.fristName}
+            {props.ride?.user.fullName.firstName}
           </h2>
         </div>
-        <h5 className="text-lg font-semibold">2.2 KM</h5>
+        <h5 className="text-lg font-semibold">2.2 KM travel</h5>
       </div>
       <div className="flex gap-2 justify-between flex-col items-center">
         <div className="w-full mt-5">
           <div className="flex items-center gap-5 p-3 border-b-2">
-            <i className="ri-map-pin-user-fill"></i>
+            {/* <i className="ri-map-pin-user-fill"></i> */}
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                {props.ride?.pickup}
+              {/* <h3 className="text-lg font-medium">562/11-A</h3> */}
+              <p className="text-2xl -mt-1 text-balck">
+                 Help Description
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2">
-            <i className="text-lg ri-map-pin-2-fill"></i>
+            {/* <i className="text-lg ri-map-pin-2-fill"></i> */}
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                {props.ride?.destination}
+              {/* <h3 className="text-lg font-medium">562/11-A</h3> */}
+              <p className="text-sm -mt-1 text-blue-600">
+                {/* {props.ride?.destination} */}
+                Negative sounds detected 
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
-            <i className="ri-currency-line"></i>
+            {/* <i className="ri-currency-line"></i> */}
             <div>
-              <h3 className="text-lg font-medium">₹{props.ride?.fare}</h3>
-              <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
+              {/* <h3 className="text-lg font-medium">₹{props.ride?.fare}</h3>
+              <p className="text-sm -mt-1 text-gray-600">Cash Cash</p> */}
             </div>
           </div>
         </div>
@@ -88,7 +90,7 @@ const ConfirmRidePopUp = (props) => {
               onChange={(e) => setOtp(e.target.value)}
               type="text"
               className="bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full mt-3"
-              placeholder="Enter OTP"
+              placeholder="Type 123 to confirm"
             />
             <button className="w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg">
               Confirm

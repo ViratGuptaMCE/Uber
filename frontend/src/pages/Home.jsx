@@ -15,6 +15,8 @@ import { useContext } from "react";
 import { UserDataContext } from "../context/UserContext";
 // import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import LiveTracking from "../components/LiveTracking";
+import { ToLocationContext } from "../context/LocationContext";
 
 const Home = () => {
     const [pickup, setPickup] = useState("");
@@ -38,8 +40,33 @@ const Home = () => {
   
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
+  const { toLocation, setToLocation } = useContext(ToLocationContext);
+  
   const navigate = useNavigate();
+  
+  const [toCords, setToCords] = useState(null);
 
+  const geocodeLocation = async (locationName) => {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+      locationName
+    )}`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.length > 0) {
+        const { lat, lon } = data[0]; // Extract the first result
+        return [parseFloat(lon), parseFloat(lat)]; // Return as [longitude, latitude]
+      } else {
+        console.error("No results found for the location:", locationName);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error geocoding location:", error);
+      return null;
+    }
+  };
   useEffect(() => {
     if(!user) return;
     socket.emit('join', {userType: 'user', userId: user._id});
@@ -157,8 +184,8 @@ const Home = () => {
           src="/logolucid.png"
           alt=""
         />
-        <div className="h-screen w-screen">
-          <img className="h-full w-full object-cover" src="/mp.JPG" alt="" />
+        <div className="h-screen w-screen z-100">
+          <LiveTracking toLocation={toLocation || [0,0]} />
         </div>
         <div className=" flex flex-col justify-end h-screen absolute top-0 w-full">
           <div className="h-[30%] p-6 bg-white relative">
@@ -177,7 +204,7 @@ const Home = () => {
                 submitHandler(e);
               }}
             >
-              <div className="line absolute h-16 w-1 top-[45%] left-10 bg-gray-700 rounded-full"></div>
+              {/* <div className="line absolute h-16 w-1 top-[45%] left-10 bg-gray-700 rounded-full"></div> */}
               <input
                 onClick={() => {
                   setPanelOpen(true);
@@ -188,7 +215,7 @@ const Home = () => {
                 onChange={(e) => {
                   setPickup(e.target.value);
                 }}
-                className="bg-[#eee] px-12 py-2 text-lg rounded-lg w-full mt-5"
+                className="bg-[#eee] px-12 py-2 text-lg rounded-lg w-full mt-5 hidden"
                 type="text"
                 placeholder="Start Location"
               />
@@ -197,6 +224,7 @@ const Home = () => {
                   setPanelOpen(true);
                   // handleLocationClick(true);
                   setIsPickup(false);
+                  setPickup("DTU Entrance Gate");
                 }}
                 value={destination}
                 onChange={(e) => {
@@ -208,9 +236,12 @@ const Home = () => {
               />
             </form>
             <button
-              onClick={() => {
+              onClick={async () => {
                 setPanelOpen(false);
                 setVehiclePanel(true);
+                const coord = await geocodeLocation(destination);
+                console.log("coord is  ",coord)
+                setToLocation(coord);
               }}
               className="bg-black text-white px-4 py-2 rounded-lg mt-4"
             >
@@ -223,6 +254,7 @@ const Home = () => {
               setVehiclePanel={setVehiclePanel}
               setLocation={setLocation}
               setPickup={setPickup}
+              setToCords={setToCords}
               setDestination={setDestination}
               pickup={pickup}
               destination={destination}
@@ -268,7 +300,7 @@ const Home = () => {
         </div>
         <div
           ref={waitingForDriverRef}
-          className="fixed w-full z-10 bottom-0 bg-white px-3 py-6 pt-0"
+          className="fixed w-full z-10 bottom-0 bg-white px-3 py-6 pt-10"
         >
           <WaitingForDriver
             ride={ride}

@@ -30,7 +30,7 @@ const CaptainDetails = () => {
           <p className="text-sm text-gray-600">Hours Dedicated</p>
         </div>
         <div className="text-center">
-          <i className="text-3xl mb-2 font-thin ri-speed-up-line"></i>
+          <img src="/pointed-star.png" className="w-9"></img>
           <h5 className="text-lg font-medium">4.6</h5>
           <p className="text-sm text-gray-600">Rating</p>
         </div>

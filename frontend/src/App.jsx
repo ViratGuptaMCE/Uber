@@ -5,7 +5,7 @@ import Land from "./pages/Land";
 import UserLogin from "./pages/UserLogin";
 import UserSignup from "./pages/UserSignup";
 import Captainlogin from "./pages/Captainlogin";
-import CaptainSignup from "./pages/CaptainSignup";
+import CaptainSignup from "./pages/ForgotSignup";
 import UserProtectWrapper from "./pages/UserProtectWrapper";
 import UserLogout from "./pages/UserLogout";
 import CaptainHome from "./pages/CaptainHome";

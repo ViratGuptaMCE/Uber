@@ -10,7 +10,7 @@ const ConfirmRide = (props) => {
       >
         <i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i>
       </h5>
-      <h3 className="text-2xl font-semibold mb-5">Help On Way</h3>
+      <h3 className="text-2xl font-semibold mb-5">Ask for Help</h3>
       <div className="flex gap-2 justify-between flex-col items-center">
         <img
           className="h-20"
@@ -23,16 +23,19 @@ const ConfirmRide = (props) => {
             <div>
               <h3 className="text-lg font-medium">3 mins</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                {props.pickup}
+                {/* {props.pickup} */}
+                Usual time for someone respond to help
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2">
             <i className="text-lg ri-map-pin-2-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">150 m</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                {props.destination}
+              <h3 className="text-lg font-medium">Location Privacy</h3>
+              <p className="text-[10px] mt-1 text-green-600">
+                {/* {props.destination} */}
+                Don't worry your location will only be visible to
+                someone when they accept request and information will be sent to police also.
               </p>
             </div>
           </div>
@@ -40,7 +43,7 @@ const ConfirmRide = (props) => {
             <i className="ri-currency-line"></i>
             <div>
               <h3 className="text-lg font-medium">{props.fare[props.vehicleType ]} </h3>
-              <p className="text-sm -mt-1 text-gray-600">Police : 7 mins away</p>
+              <p className="text-sm -mt-1 text-gray-600">Usual Police Response : 7 mins away</p>
             </div>
           </div>
         </div>
@@ -49,7 +52,7 @@ const ConfirmRide = (props) => {
           props.setConfirmRidePanel(false)
           props.createRide()
         }} className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg">
-          Cancel Request
+          Raise Request
         </button>
       </div>
     </div>
