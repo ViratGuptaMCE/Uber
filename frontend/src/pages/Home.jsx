@@ -17,6 +17,7 @@ import { UserDataContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import LiveTracking from "../components/LiveTracking";
 import { ToLocationContext } from "../context/LocationContext";
+import Sound from "../components/Sound";
 
 const Home = () => {
     const [pickup, setPickup] = useState("");
@@ -41,6 +42,7 @@ const Home = () => {
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
   const { toLocation, setToLocation } = useContext(ToLocationContext);
+  const [soundPane, setSoundPane] = useState(false);
   
   const navigate = useNavigate();
   
@@ -187,6 +189,7 @@ const Home = () => {
         <div className="h-screen w-screen z-100">
           <LiveTracking toLocation={toLocation || [0,0]} />
         </div>
+        {/* {!soundPane && <Sound/>} */}
         <div className=" flex flex-col justify-end h-screen absolute top-0 w-full">
           <div className="h-[30%] p-6 bg-white relative">
             <h5
