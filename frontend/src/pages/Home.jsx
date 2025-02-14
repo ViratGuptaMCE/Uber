@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import LiveTracking from "../components/LiveTracking";
 import { ToLocationContext } from "../context/LocationContext";
 import Sound from "../components/Sound";
+import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
     const [pickup, setPickup] = useState("");
@@ -96,6 +97,9 @@ const Home = () => {
       } else {
         setDestination(location);
       }
+  };
+  const handleClose = () => {
+    setSoundPane(false);
   };
   async function createRide() {
     setType("car");
@@ -187,9 +191,10 @@ const Home = () => {
           alt=""
         />
         <div className="h-screen w-screen z-100">
-          <LiveTracking toLocation={toLocation || [0,0]} />
+          <LiveTracking toLocation={toLocation || [0, 0]} />
         </div>
-        {/* {!soundPane && <Sound/>} */}
+        {soundPane && <Sound soundPane={soundPane} onClose={handleClose} setVehicleFound={setVehicleFound} destination={destination} pickup={pickup} />}
+        <ToastContainer position="top-center" />
         <div className=" flex flex-col justify-end h-screen absolute top-0 w-full">
           <div className="h-[30%] p-6 bg-white relative">
             <h5
@@ -227,7 +232,7 @@ const Home = () => {
                   setPanelOpen(true);
                   // handleLocationClick(true);
                   setIsPickup(false);
-                  setPickup("DTU Entrance Gate");
+                  setPickup("Kashmere Gate, Delhi, India");
                 }}
                 value={destination}
                 onChange={(e) => {
@@ -243,7 +248,7 @@ const Home = () => {
                 setPanelOpen(false);
                 setVehiclePanel(true);
                 const coord = await geocodeLocation(destination);
-                console.log("coord is  ",coord)
+                console.log("coord is  ", coord);
                 setToLocation(coord);
               }}
               className="bg-black text-white px-4 py-2 rounded-lg mt-4"
@@ -273,6 +278,7 @@ const Home = () => {
           <VehiclePanel
             setConfirmRidePanel={setConfirmRidePanel}
             setVehiclePanel={setVehiclePanel}
+            setSoundPane = {setSoundPane}
           />
         </div>
         <div
@@ -308,7 +314,8 @@ const Home = () => {
           <WaitingForDriver
             ride={ride}
             setVehicleFound={setVehicleFound}
-            waitingForDriver={waitingForDriver} />
+            waitingForDriver={waitingForDriver}
+          />
         </div>
       </div>
     );

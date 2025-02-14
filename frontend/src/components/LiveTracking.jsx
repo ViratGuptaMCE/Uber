@@ -469,7 +469,7 @@ const LiveTracking = (props) => {
         }),
       ],
       view: new View({
-        center: fromLonLat([77.2315, 28.652]), // Default to Delhi
+        center: fromLonLat([77.23236862304168, 28.665263625607647]), // Default to Delhi
         zoom: 13,
       }),
     });
@@ -491,6 +491,7 @@ const LiveTracking = (props) => {
         const { latitude, longitude } = position.coords;
         const currentLocation = fromLonLat([longitude, latitude]);
         setFromLocation(currentLocation);
+        console.log("Detected Location : ");
 
         // Add a marker for the current location
         const fromMarker = new Feature({
@@ -522,6 +523,7 @@ const LiveTracking = (props) => {
         } else {
           // Center the map on the user's current location
           map.getView().setCenter(currentLocation);
+          console.log(currentLocation);
           map.getView().setZoom(15);
         }
       },

@@ -1,5 +1,27 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+// import axios from "axios";
 const VehiclePanel = (props) => {
+  
+  // const sendSMS = async () => {
+  //   const location = `[77.23236862304168, 28.665263625607647]`;
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_BASE_URL}/send-sms`,
+  //       {
+  //         to: `${import.meta.env.VITE_MOBILE_NUM}`,
+  //         message: `Alert! I am in trouble. Please reach at ${location}`,
+  //       }
+  //     );
+  //     alert(response.data);
+  //   } catch (error) {
+  //     alert(`Error: ${error.message}`);
+  //   }
+  // }
+  const handleSOS = () => {
+    // await sendSMS();
+    toast.success("SOS sent successfully");
+  }
   return (
     <div>
       <h5
@@ -13,7 +35,7 @@ const VehiclePanel = (props) => {
       <h3 className="text-2xl font-semibold mb-5">Any Emergency</h3>
       <div
         onClick={() => {
-          props.setConfirmRidePanel(true);
+          props.setSoundPane(true);
         }}
         className="flex border-2 active:border-black  mb-2 rounded-xl w-full p-3  items-center justify-between"
       >
@@ -28,12 +50,14 @@ const VehiclePanel = (props) => {
             emergency
           </p>
         </div>
-        <button className="text-lg bg-amber-400 p-2 px-4 rounded-3xl font-semibold">Confirm</button>
+        <button className="text-lg bg-amber-400 p-2 px-4 rounded-3xl font-semibold">
+          Confirm
+        </button>
       </div>
       <div
-        onClick={() => {
-          props.setConfirmRidePanel(true);
-        }}
+        // onClick={() => {
+        //   props.setConfirmRidePanel(true);
+        // }}
         className="flex border-2 active:border-black mb-2 rounded-xl w-full p-3  items-center justify-between"
       >
         <img className="h-10" src="/sos.png" alt="" />
@@ -46,7 +70,7 @@ const VehiclePanel = (props) => {
             To Police and family
           </p>
         </div>
-        <button className="text-lg font-semibold bg-red-500 p-2 px-4 rounded-3xl text-white">
+        <button className="text-lg font-semibold bg-red-500 p-2 px-4 rounded-3xl text-white" onClick={handleSOS}>
           Send
         </button>
       </div>
